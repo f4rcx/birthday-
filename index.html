@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joyeux anniversaire Dina !</title>
+<meta name="description" content="Une petite surprise pour les 18 ans de Dina.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* ==========================================================
+   ✏️  LA LETTRE — c'est ici que tu modifies le texte.
+   Chaque élément de "paragraphes" = un paragraphe.
+   ========================================================== */
+const LETTRE = {
+  salutation: "Ma chère Dina,",
+  paragraphes: [
+    "Aujourd'hui tu as 18 ans. DIX-HUIT. Je te laisse deux secondes pour réaliser.",
+    "Je voulais t'offrir quelque chose qu'on ne trouve dans aucun magasin, alors voilà : une petite page sur internet, rien que pour toi.",
+    "Merci d'être toi. Merci pour les fous rires, pour les conversations qui durent beaucoup trop longtemps, et pour toutes les fois où tu as été là sans que j'aie besoin de demander.",
+    "Je te souhaite une saison 18 encore plus belle que toutes les précédentes : plein de rebondissements (les bons), zéro mauvais épisode, et une fin heureuse à chaque fois.",
+    "Et promis : je ne t'appelle jamais pendant Yalı Çapkını."
+  ],
+  cloture: "Joyeux anniversaire ✨",
+  signature: "Quelqu'un qui t'adore"
+};
+</script>
+
+<style>
+  :root {
+    --teal: #12b5b0;
+    --teal-deep: #0a6f78;
+    --orange: #ff8a3d;
+    --pink: #ff7aa8;
+    --pink-deep: #f0528a;
+    --yellow: #ffd23f;
+    --cream: #fff6ea;
+    --paper: #fffdf7;
+    --ink: #2b2140;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 500;
+    color: var(--ink);
+    background-color: var(--cream);
+    background-image: radial-gradient(rgba(255, 122, 168, .22) 2px, transparent 2.5px);
+    background-size: 26px 26px;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+  button:focus-visible { outline: 3px solid var(--teal-deep); outline-offset: 4px; }
+
+  #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 56px 16px 72px;
+    overflow: hidden;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(2px); opacity: .5; z-index: 0; }
+  .blob.b1 { width: 340px; height: 340px; background: #bff1ee; top: -90px; left: -110px; }
+  .blob.b2 { width: 300px; height: 300px; background: #ffd9e6; bottom: -80px; right: -90px; }
+  .blob.b3 { width: 180px; height: 180px; background: #ffeaa6; top: 18%; right: -60px; }
+
+  .balloons { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .balloon {
+    position: absolute; bottom: -160px;
+    width: 62px; height: 76px;
+    border-radius: 50% 50% 48% 48% / 56% 56% 44% 44%;
+    background: var(--c);
+    box-shadow: inset -8px -10px 0 rgba(0, 0, 0, .08), inset 8px 8px 0 rgba(255, 255, 255, .3);
+    animation: rise var(--d) linear infinite;
+    animation-delay: var(--delay);
+    pointer-events: auto; cursor: pointer;
+  }
+  .balloon::before {
+    content: ""; position: absolute; left: 50%; bottom: -7px;
+    border: 6px solid transparent; border-bottom-color: var(--c);
+    transform: translateX(-50%);
+  }
+  .balloon::after {
+    content: ""; position: absolute; left: 50%; top: 100%;
+    width: 2px; height: 70px; background: rgba(43, 33, 64, .25);
+  }
+  .balloon.pop { animation: pop .25s ease-out forwards; }
+  @keyframes rise {
+    0%   { transform: translate(0, 0) rotate(-4deg); }
+    50%  { transform: translate(18px, -65vh) rotate(5deg); }
+    100% { transform: translate(-8px, -135vh) rotate(-4deg); }
+  }
+  @keyframes pop { to { transform: scale(1.7); opacity: 0; } }
+
+  .hero > .content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Fredoka", sans-serif; font-weight: 600; font-size: .85rem; letter-spacing: .12em;
+    background: var(--ink); color: #fff;
+    padding: 8px 16px; border-radius: 999px;
+    transform: rotate(-2deg);
+    box-shadow: 4px 4px 0 var(--yellow);
+  }
+  .badge .play { color: var(--yellow); }
+
+  .eyebrow {
+    margin-top: 26px;
+    font-family: "Fredoka", sans-serif; font-weight: 600;
+    font-size: clamp(1.5rem, 6vw, 2.4rem);
+    color: var(--teal-deep);
+  }
+  .name {
+    font-family: "Fredoka", sans-serif; font-weight: 700;
+    font-size: clamp(4.2rem, 21vw, 9rem); line-height: .95;
+    color: var(--pink);
+    -webkit-text-stroke: 3px var(--ink);
+    paint-order: stroke fill;
+    text-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(-3deg);
+    margin: 4px 0 6px;
+  }
+  .name span { display: inline-block; animation: wiggle 2.4s ease-in-out infinite; animation-delay: calc(var(--i) * .15s); }
+  @keyframes wiggle { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(4deg); } }
+
+  .age-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 14px; }
+  .age {
+    font-family: "Fredoka", sans-serif; font-weight: 700;
+    font-size: clamp(3.4rem, 15vw, 6rem); line-height: 1;
+    color: var(--yellow);
+    -webkit-text-stroke: 3px var(--ink);
+    paint-order: stroke fill;
+    text-shadow: 5px 5px 0 var(--teal);
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+  .age-label { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: clamp(1.4rem, 5.5vw, 2rem); color: var(--ink); }
+  @keyframes bounce { 0%, 100% { transform: scale(1) rotate(3deg); } 50% { transform: scale(1.1) rotate(-3deg); } }
+
+  .tagline { margin-top: 18px; max-width: 30ch; font-size: 1.05rem; font-weight: 700; }
+
+  .cta {
+    margin-top: 28px;
+    font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.15rem;
+    background: var(--teal); color: #fff;
+    padding: 14px 26px; border-radius: 999px;
+    border: 3px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    text-decoration: none; display: inline-block;
+    transition: transform .12s, box-shadow .12s;
+  }
+  .cta:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--ink); }
+  .cta:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
+  .hint { margin-top: 16px; font-size: .85rem; opacity: .65; }
+
+  /* ---------- Martin-pêcheur ---------- */
+  .bird-wrap { margin-top: 34px; display: flex; align-items: flex-end; justify-content: center; gap: 4px; }
+  .bird { width: 104px; flex: none; transform-origin: 50% 100%; }
+  .bird svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .bird.hop { animation: hop .5s ease; }
+  @keyframes hop { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-22px) rotate(-8deg); } 70% { transform: translateY(0) rotate(4deg); } }
+  .bubble {
+    position: relative; max-width: 210px; text-align: left;
+    background: #fff; border: 3px solid var(--ink); border-radius: 18px;
+    padding: 10px 14px; margin-bottom: 44px;
+    font-size: .92rem; font-weight: 700; line-height: 1.35;
+    box-shadow: 4px 4px 0 var(--teal);
+  }
+  .bubble::before {
+    content: ""; position: absolute; left: -11px; bottom: 14px;
+    width: 16px; height: 16px; background: #fff;
+    border-left: 3px solid var(--ink); border-bottom: 3px solid var(--ink);
+    transform: rotate(45deg);
+  }
+  .bubble em { color: var(--teal-deep); font-style: normal; }
+
+  /* ---------- Lettre ---------- */
+  .letter-section {
+    position: relative; padding: 72px 16px 96px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    background: linear-gradient(#ffe3ee, #ffe3ee);
+    border-top: 3px solid var(--ink);
+  }
+  .letter-section h2 {
+    font-family: "Fredoka", sans-serif; font-weight: 700;
+    font-size: clamp(1.8rem, 7vw, 2.6rem); color: var(--ink);
+  }
+  .letter-section .sub { margin-top: 8px; font-weight: 700; opacity: .75; }
+
+  .envelope {
+    position: relative; display: block;
+    width: min(340px, 86vw); aspect-ratio: 3 / 2;
+    margin-top: 56px;
+    perspective: 900px;
+    transition: transform .2s, margin-top .5s ease;
+  }
+  .envelope:not(.open) { animation: nudge 2.6s ease-in-out infinite; }
+  .envelope:not(.open):hover { transform: scale(1.03) rotate(-1deg); }
+  @keyframes nudge { 0%, 86%, 100% { transform: rotate(0); } 90% { transform: rotate(-3deg); } 94% { transform: rotate(3deg); } }
+  .env-back, .env-front, .env-flap, .env-paper { position: absolute; display: block; }
+  .env-back { inset: 0; background: var(--pink-deep); border: 3px solid var(--ink); border-radius: 14px; box-shadow: 7px 7px 0 var(--ink); }
+  .env-paper {
+    left: 7%; right: 7%; top: 8%; height: 84%;
+    background: var(--paper); border: 3px solid var(--ink); border-radius: 8px;
+    font-family: "Caveat", cursive; font-weight: 700; font-size: 1.5rem; color: var(--ink);
+    padding-top: 14px;
+    transition: transform .7s cubic-bezier(.3, 1.4, .5, 1) .35s;
+    z-index: 1;
+  }
+  .env-front {
+    inset: 0; background: var(--pink); border-radius: 14px;
+    clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+    border: 3px solid var(--ink); border-top: 0;
+    z-index: 2;
+  }
+  .env-flap {
+    left: 0; right: 0; top: 0; height: 58%;
+    background: #ff94b9;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: 50% 0;
+    transition: transform .55s ease, z-index 0s .25s;
+    z-index: 3;
+    filter: drop-shadow(0 3px 0 rgba(43, 33, 64, .35));
+  }
+  .seal {
+    position: absolute; left: 50%; top: 52%; z-index: 4;
+    width: 62px; height: 62px; margin: -31px 0 0 -31px;
+    display: grid; place-items: center;
+    background: var(--yellow); border: 3px solid var(--ink); border-radius: 50%;
+    font-size: 1.6rem;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform .3s, opacity .3s;
+  }
+  .envelope.open { margin-top: 160px; }
+  .envelope.open .env-flap { transform: rotateX(180deg); z-index: 0; }
+  .envelope.open .env-paper { transform: translateY(-46%); }
+  .envelope.open .seal { transform: scale(0) rotate(90deg); opacity: 0; }
+  .tap-label { margin-top: 26px; font-family: "Fredoka", sans-serif; font-weight: 600; color: var(--pink-deep); }
+
+  .letter {
+    width: min(560px, 100%); margin-top: 44px; text-align: left;
+    position: relative;
+    background-color: var(--paper);
+    background-image: repeating-linear-gradient(transparent 0 2.39rem, rgba(18, 181, 176, .28) 2.39rem 2.5rem);
+    background-position: 0 1.4rem;
+    border: 3px solid var(--ink); border-radius: 10px;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 2.5rem 1.6rem 2rem;
+    font-family: "Caveat", cursive; font-weight: 500;
+    font-size: 1.6rem; line-height: 2.5rem;
+    transform: rotate(-1deg);
+  }
+  .letter[hidden] { display: none; }
+  .letter.show { animation: letterIn .7s cubic-bezier(.3, 1.4, .5, 1) both; }
+  @keyframes letterIn { from { opacity: 0; transform: translateY(40px) rotate(4deg) scale(.9); } to { opacity: 1; transform: rotate(-1deg); } }
+  .letter::before, .letter::after {
+    content: ""; position: absolute; top: -14px; width: 92px; height: 28px;
+    background: rgba(255, 210, 63, .85); border: 2px solid rgba(43, 33, 64, .35);
+  }
+  .letter::before { left: 18px; transform: rotate(-6deg); }
+  .letter::after { right: 18px; transform: rotate(5deg); background: rgba(18, 181, 176, .7); }
+  .letter p { opacity: 0; transform: translateY(10px); margin-bottom: 2.5rem; }
+  .letter.show p { animation: lineIn .6s ease forwards; animation-delay: calc(.5s + var(--i) * .45s); }
+  @keyframes lineIn { to { opacity: 1; transform: none; } }
+  .letter .hello { font-weight: 700; font-size: 1.9rem; color: var(--pink-deep); }
+  .letter .bye { font-weight: 700; font-size: 1.9rem; color: var(--teal-deep); margin-bottom: 0; }
+  .letter .sign { text-align: right; font-weight: 700; margin-bottom: 0; }
+
+  .again {
+    margin-top: 40px;
+    font-family: "Fredoka", sans-serif; font-weight: 600;
+    background: var(--yellow); padding: 12px 22px; border-radius: 999px;
+    border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+  }
+  .again[hidden] { display: none; }
+  .again:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+
+  footer {
+    background: var(--ink); color: #fff; text-align: center;
+    padding: 28px 16px; font-size: .9rem; line-height: 1.7;
+  }
+  footer strong { font-family: "Fredoka", sans-serif; letter-spacing: .14em; color: var(--yellow); display: block; }
+
+  @media (max-width: 420px) {
+    .bird { width: 86px; }
+    .bubble { font-size: .85rem; }
+    .letter { font-size: 1.45rem; padding: 2.5rem 1.2rem 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .balloons { display: none; }
+    .letter p { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<header class="hero" id="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="balloons" id="balloons" aria-hidden="true"></div>
+
+  <div class="content">
+    <div class="badge"><span class="play">▶</span> SAISON 18 · ÉPISODE 1</div>
+
+    <p class="eyebrow">Joyeux anniversaire</p>
+    <h1 class="name" aria-label="Dina">
+      <span style="--i:0">D</span><span style="--i:1">i</span><span style="--i:2">n</span><span style="--i:3">a</span>
+    </h1>
+
+    <div class="age-row">
+      <span class="age">18</span>
+      <span class="age-label">ans aujourd'hui&nbsp;!</span>
+    </div>
+
+    <p class="tagline">La nouvelle saison commence maintenant, et c'est toi l'héroïne.</p>
+
+    <a class="cta" href="#lettre">Tu as du courrier 💌</a>
+    <p class="hint">(touche l'écran, éclate les ballons… c'est ta fête)</p>
+
+    <div class="bird-wrap">
+      <button class="bird" id="bird" aria-label="Le martin-pêcheur">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- branche -->
+          <path d="M6 104 H114" stroke="#2b2140" stroke-width="7" stroke-linecap="round"/>
+          <!-- queue -->
+          <path d="M26 82 L6 92 L24 94 Z" fill="#0a6f78" stroke="#2b2140" stroke-width="3" stroke-linejoin="round"/>
+          <!-- corps -->
+          <ellipse cx="52" cy="72" rx="32" ry="28" fill="#12b5b0" stroke="#2b2140" stroke-width="3"/>
+          <!-- ventre -->
+          <path d="M40 94 C34 78 48 62 66 64 C82 68 82 90 66 98 C56 101 46 100 40 94 Z" fill="#ff8a3d"/>
+          <!-- tête -->
+          <circle cx="70" cy="44" r="24" fill="#12b5b0" stroke="#2b2140" stroke-width="3"/>
+          <!-- joue -->
+          <ellipse cx="66" cy="54" rx="9" ry="6" fill="#ff8a3d"/>
+          <ellipse cx="54" cy="58" rx="6" ry="4" fill="#fff"/>
+          <!-- bec -->
+          <path d="M91 40 L118 46 L91 52 Z" fill="#2b2140" stroke="#2b2140" stroke-width="3" stroke-linejoin="round"/>
+          <!-- œil -->
+          <circle cx="78" cy="40" r="6" fill="#2b2140"/>
+          <circle cx="80" cy="38" r="2" fill="#fff"/>
+          <!-- aile -->
+          <path d="M30 70 C36 56 56 56 60 72 C56 86 38 88 30 70 Z" fill="#0a6f78" stroke="#2b2140" stroke-width="3" stroke-linejoin="round"/>
+          <!-- pattes -->
+          <path d="M50 99 V104 M62 99 V104" stroke="#ff8a3d" stroke-width="4" stroke-linecap="round"/>
+          <!-- chapeau de fête -->
+          <path d="M56 24 L64 -2 L80 20 Z" fill="#ff7aa8" stroke="#2b2140" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="64" cy="-3" r="5" fill="#ffd23f" stroke="#2b2140" stroke-width="3"/>
+        </svg>
+      </button>
+      <div class="bubble">Psst… <em>«&nbsp;yalı çapkını&nbsp;»</em>, en turc, ça veut dire martin-pêcheur. C'est moi&nbsp;!</div>
+    </div>
+  </div>
+</header>
+
+<main class="letter-section" id="lettre">
+  <h2>Une lettre pour toi</h2>
+  <p class="sub">Livraison spéciale du 12 novembre</p>
+
+  <button class="envelope" id="envelope" aria-expanded="false" aria-controls="letter" aria-label="Ouvrir l'enveloppe">
+    <span class="env-back"></span>
+    <span class="env-paper">Pour Dina ♥</span>
+    <span class="env-front"></span>
+    <span class="env-flap"></span>
+    <span class="seal">💖</span>
+  </button>
+  <p class="tap-label" id="tapLabel">Touche l'enveloppe pour l'ouvrir</p>
+
+  <article class="letter" id="letter" hidden></article>
+  <button class="again" id="again" hidden>Encore des confettis 🎉</button>
+</main>
+
+<footer>
+  <strong>GÉNÉRIQUE DE FIN</strong>
+  Dans le rôle principal : Dina · Fait avec ♥ pour ses 18 ans
+</footer>
+
+<script>
+(function () {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const COLORS = ["#12b5b0", "#ff8a3d", "#ff7aa8", "#ffd23f", "#0a6f78", "#ffffff"];
+
+  /* ---------- Confettis ---------- */
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  let W = 0, H = 0, parts = [], running = false;
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  addEventListener("resize", resize); resize();
+
+  function burst(x, y, n) {
+    if (reduced) n = Math.min(n, 12);
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, s = 4 + Math.random() * 9;
+      parts.push({
+        x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 5,
+        w: 6 + Math.random() * 7, h: 4 + Math.random() * 5,
+        r: Math.random() * 6, vr: (Math.random() - .5) * .4,
+        c: COLORS[(Math.random() * COLORS.length) | 0], life: 0,
+        max: 90 + Math.random() * 60, round: Math.random() < .3
+      });
+    }
+    if (parts.length > 900) parts.splice(0, parts.length - 900);
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    parts = parts.filter(p => p.life < p.max && p.y < H + 40);
+    for (const p of parts) {
+      p.life++; p.vy += .28; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, (p.max - p.life) / 25);
+      ctx.translate(p.x, p.y); ctx.rotate(p.r);
+      ctx.fillStyle = p.c;
+      if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.h, 0, 7); ctx.fill(); }
+      else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * (0.4 + Math.abs(Math.sin(p.life / 6))));
+      ctx.restore();
+    }
+    if (parts.length) requestAnimationFrame(tick); else { running = false; ctx.clearRect(0, 0, W, H); }
+  }
+  function rain() {
+    let n = 0;
+    const id = setInterval(() => {
+      burst(Math.random() * W, -10, 22);
+      if (++n > 9) clearInterval(id);
+    }, 110);
+  }
+
+  /* ---------- Ballons ---------- */
+  const balloons = document.getElementById("balloons");
+  if (!reduced) {
+    for (let i = 0; i < 8; i++) {
+      const b = document.createElement("span");
+      b.className = "balloon";
+      b.style.left = (4 + i * 12.5 + Math.random() * 4) + "%";
+      b.style.setProperty("--c", COLORS[i % 4]);
+      b.style.setProperty("--d", (11 + Math.random() * 8) + "s");
+      b.style.setProperty("--delay", (-Math.random() * 16) + "s");
+      b.addEventListener("click", e => {
+        e.stopPropagation();
+        const r = b.getBoundingClientRect();
+        burst(r.left + r.width / 2, r.top + r.height / 2, 28);
+        b.classList.add("pop");
+        setTimeout(() => { b.classList.remove("pop"); b.style.animation = "none"; void b.offsetWidth; b.style.animation = ""; }, 260);
+      });
+      balloons.appendChild(b);
+    }
+  }
+
+  /* ---------- Touche l'écran = confettis ---------- */
+  document.getElementById("hero").addEventListener("click", e => {
+    if (e.target.closest("a, button")) return;
+    burst(e.clientX, e.clientY, 26);
+  });
+
+  const bird = document.getElementById("bird");
+  bird.addEventListener("click", () => {
+    const r = bird.getBoundingClientRect();
+    burst(r.right - 10, r.top + r.height * .4, 30);
+    bird.classList.remove("hop"); void bird.offsetWidth; bird.classList.add("hop");
+  });
+
+  /* ---------- Lettre ---------- */
+  const letter = document.getElementById("letter");
+  const lines = [
+    ["hello", LETTRE.salutation],
+    ...LETTRE.paragraphes.map(t => ["", t]),
+    ["bye", LETTRE.cloture],
+    ["sign", "— " + LETTRE.signature]
+  ];
+  lines.forEach(([cls, text], i) => {
+    const p = document.createElement("p");
+    if (cls) p.className = cls;
+    p.style.setProperty("--i", i);
+    p.textContent = text;
+    letter.appendChild(p);
+  });
+
+  const envelope = document.getElementById("envelope");
+  const again = document.getElementById("again");
+  const tapLabel = document.getElementById("tapLabel");
+  envelope.addEventListener("click", () => {
+    if (envelope.classList.contains("open")) { letter.scrollIntoView({ block: "start" }); return; }
+    envelope.classList.add("open");
+    envelope.setAttribute("aria-expanded", "true");
+    tapLabel.textContent = "Joyeux anniversaire, Dina !";
+    const r = envelope.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 3, 70);
+    setTimeout(() => {
+      letter.hidden = false; again.hidden = false;
+      letter.classList.add("show");
+      rain();
+      letter.scrollIntoView({ block: "center" });
+    }, reduced ? 0 : 1100);
+  });
+  again.addEventListener("click", rain);
+
+  /* Petit accueil festif */
+  setTimeout(() => burst(W / 2, H * .3, 60), 500);
+})();
+</script>
+</body>
+</html>
